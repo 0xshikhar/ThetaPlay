@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Router, { useRouter } from "next/navigation";
 import React, { useState, useEffect } from "react";
-import Logo from '../../../public/images/Logo.png'
+import Logo from '../../../public/images/PlayLogo.png'
 import { AiOutlineSearch } from "react-icons/ai";
 import { CgProfile } from "react-icons/cg";
 import { MdOutlineAccountBalanceWallet } from "react-icons/md";
@@ -46,7 +46,7 @@ export default function Navbar() {
 				<div className="flex items-center cursor-pointer">
 					<Image src={Logo} height={30} width={50} alt="logo" />
 
-					<div className="ml-[0.8rem] text-white text-2xl font-serif">PlayVerse</div>
+					<div className="ml-[0.8rem] text-white text-2xl font-serif">ThetaPlay</div>
 				</div>
 			</Link>
 			{/* search bar to search streams */}
@@ -108,25 +108,7 @@ export default function Navbar() {
 				</div>
 				<div className="px-2">
 					{/* <ConnectButton></ConnectButton> */}
-					<details className="dropdown dropdown-bottom dropdown-end ">
-						{/* <button onClick={toggleDropdown} className="px-6 py-2 bg-[#98ee2c] text-black font-semibold ">Connect Wallet</button> */}
-						<summary className="btn px-4 py-1 bg-[#98ee2c] text-black font-semibold">Connect</summary>
-						<ul className="p-2 menu dropdown-content z-[1] bg-base-100 rounded-box">
-							<li><a>
-								<ConnectButton></ConnectButton>
-							</a></li>
-							<li><a>
-								{/* <p>{anonAadhaar?.status}</p> */}
-							</a></li>
-						</ul>
-						{/* {isDropdownOpen && (
-							// <div className="dropdown-content">
-							// 	<a href="#option1" className="break-all">Option 1</a>
-							// 	<a href="#option2" className="break-all">Option 2</a>
-							// </div>
-							
-						)} */}
-					</details>
+					<ConnectButton></ConnectButton>
 
 				</div>
 

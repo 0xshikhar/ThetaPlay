@@ -32,12 +32,12 @@ const Hero = () => {
                             <div className={style.description}>Introducing
                             </div>
                             <div className='px-2 text-[#98ee2c] mt-[0.8rem] mb-[.5rem] font-bold text-3xl font-serif '>
-                                PlayVerse
+                                ThetaPlay
                             </div>
                         </div>
 
                         <div className={style.title}>
-                            Stream & Organize Games on Manta Blockchain
+                            Stream & Organize Games on Theta Blockchain
                         </div>
 
                         <div className={style.ctaContainer}>

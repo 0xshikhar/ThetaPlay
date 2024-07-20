@@ -8,6 +8,7 @@ import {
     RainbowKitProvider,
     connectorsForWallets,
     getDefaultWallets,
+    darkTheme,
 } from '@rainbow-me/rainbowkit';
 import {
     argentWallet,
@@ -70,7 +71,14 @@ export function Providers({ children }: { children: React.ReactNode }) {
     return (
         <WagmiProvider config={config}>
             <QueryClientProvider client={queryClient}>
-                <RainbowKitProvider appInfo={demoAppInfo}>
+                <RainbowKitProvider appInfo={demoAppInfo}
+                    theme={darkTheme({
+                        accentColor: '#98ee2c',
+                        accentColorForeground: 'black',
+                        borderRadius: 'medium',
+                        fontStack: 'system',
+                    })}>
+
                     {mounted && children}
                 </RainbowKitProvider>
             </QueryClientProvider>

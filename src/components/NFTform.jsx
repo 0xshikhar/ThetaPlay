@@ -90,7 +90,7 @@ const NFTform = () => {
                     <dialog id="my_modal_3" className="modal">
                         <form method="dialog" className="modal-box">
                             <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onClick={() => { router.push('/event') }} >✕</button>
-                            <h3 className="font-bold text-lg">🎉 PlayVerse NFT Minted 🎉</h3>
+                            <h3 className="font-bold text-lg">🎉 ThetaPlay NFT Minted 🎉</h3>
                             <p className="py-4">Create Your NFT Based Event Now</p>
                         </form>
                     </dialog>
