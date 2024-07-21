@@ -8,7 +8,14 @@ import { BiHeart } from "react-icons/bi";
 import { useRouter } from "next/navigation";
 import { Player } from "@livepeer/react";
 
-const streamingPage = (props) => {
+interface Stream {
+    id: string;
+    name?: string;
+    isActive?: boolean;
+    playbackId?: string;
+}
+
+const streamingPage = (props : Stream) => {
     console.log(props.id);
     const id = props.id;
     const name = props.name;

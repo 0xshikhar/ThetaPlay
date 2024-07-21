@@ -23,7 +23,7 @@ const Viewer = () => {
         }
     }, []);
 
-    const handleUpdate = async (event) => {
+    const handleUpdate = async (event : React.FormEvent) => {
         event.preventDefault();
         console.log("data updating..");
         try {
@@ -43,9 +43,9 @@ const Viewer = () => {
 
             if (response.ok) {
                 // Handle successful response
-                const inc = parseInt(gameId) + 1;
+                const inc = parseInt(gameId.toString()) + 1;
                 console.log(inc);
-                localStorage.setItem("gameId", inc);
+                localStorage.setItem("gameId", inc.toString());
                 console.log("Data sent successfully!");
                 const checkgameid = localStorage.getItem("gameId");
                 console.log(checkgameid);
@@ -62,7 +62,7 @@ const Viewer = () => {
         }
     };
 
-    const handleDelete = async (event) => {
+    const handleDelete = async (event : React.FormEvent) => {
         event.preventDefault();
         try {
             const tournamentId = localStorage.getItem("TournId");
@@ -88,19 +88,19 @@ const Viewer = () => {
         }
     };
 
-    const handleOpp1Data = (event) => {
-        setOpp1Data(event.target.value);
+    const handleOpp1Data = (event : React.ChangeEvent<HTMLInputElement>) => {
+        setOpp1Data(parseFloat(event.target.value));
     };
 
-    const handleOpp2Data = (event) => {
-        setOpp2Data(event.target.value);
+    const handleOpp2Data = (event : React.ChangeEvent<HTMLInputElement>) => {
+        setOpp2Data(parseFloat(event.target.value));
     };
 
     return (
         <div className="flex flex-col text-gray-500">
             <div className="flex justify-center mt-10">
                 <h1 className="text-4xl font-[700]">
-                    {tname ? tname : "Tournament Name"}
+                    {name ? name : "Tournament Name"}
                 </h1>
             </div>
             <div className="h-[480px] w-[800px] flex flex-row justify-center content-center mb-[2rem] rounded-[10px] bg-white ml-[25%]">
