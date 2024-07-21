@@ -1,8 +1,14 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState } from 'react'
 import { BsArrowRight } from 'react-icons/bs'
 import { useRouter } from 'next/navigation';
+
+declare global {
+    interface Window {
+        my_modal_3: any;
+    }
+}
 
 const NFTform = () => {
     const router = useRouter();
@@ -12,25 +18,25 @@ const NFTform = () => {
     const [nftPrice, setNftPrice] = useState('');
     const [nftAmount, setNftAmount] = useState('');
 
-    const onFormSubmit = async (event) => {
+    const onFormSubmit = async (event: React.FormEvent) => {
         window.my_modal_3.showModal();
         event.preventDefault();
     }
 
-    const nameHandler = (event) => {
+    const nameHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
         setNftName(event.target.value);
     }
 
-    const descriptionHandler = (event) => {
+    const descriptionHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
         setNftDescription(event.target.value);
     }
 
-    const imageHandler = (event) => {
+    const imageHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
         // do ipfs upload here and set the image url to nftImage
         setNftImage(event.target.value);
     }
 
-    const priceHandler = (event) => {
+    const priceHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
         setNftPrice(event.target.value);
     }
 

@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from "react";
 
+declare global {
+    interface Window {
+        bracketsViewer: any;
+    }
+}
+
 const BracketView = () => {
     async function fetchData() {
         try {

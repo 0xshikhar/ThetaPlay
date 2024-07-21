@@ -2,16 +2,15 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import { BsArrowRight } from "react-icons/bs";
-import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useRouter } from "next/navigation";
+import  DatePicker from 'react-datepicker'
 
 const EventForm = () => {
     const [eventName, setEventName] = useState("");
     const [eventDescription, setEventDescription] = useState("");
     const [eventImage, setEventImage] = useState("");
-    const [eventTime, setEventTime] = useState("");
-    const [success, setSuccess] = useState(false);
+    const [eventTime, setEventTime] = useState<Date | null>(null);
     const router = useRouter();
 
     const profiles = [
@@ -38,11 +37,11 @@ const EventForm = () => {
         },
     ];
 
-    const Submit = async (event) => {
+    const Submit = async (event : React.FormEvent) => {
         event.preventDefault();
 
         try {
-            console.log("event name",eventName);
+            console.log("event name", eventName);
             const response = await fetch("/api/stream/createStream", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -55,29 +54,40 @@ const EventForm = () => {
             setEventName("");
             const data = await response.json();
             console.log(data);
-            const route = data.id;
-            router.push({ pathname: `/dashboard/${route}` });
+            const route= data.id as string || null;
+            if (route) {
+                router.push(`/dashboard/${route}`);
+                // router.push({ pathname: `/dashboard/${route}` });
+                // why we have to use pathname here??? 
+            }
+
         } catch (error) {
             console.error(error);
         }
     };
 
-    const nameHandler = (event) => {
+    const nameHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
         setEventName(event.target.defaultValue);
     };
 
-    const descriptionHandler = (event) => {
+    const descriptionHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
         setEventDescription(event.target.defaultValue);
     };
 
-    const imageHandler = (event) => {
+    const imageHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
         // do ipfs upload here and set the image url to eventImage
         setEventImage(event.target.defaultValue);
     };
 
-    const timeHandler = (event) => {
-        setEventTime(event.target.defaultValue);
+    const timeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const date = new Date(event.target.value);
+        if (!isNaN(date.getTime())) {
+            setEventTime(date);
+        } else {
+            setEventTime(null); // Handle invalid date
+        }
     };
+
 
     return (
         <div>
@@ -149,7 +159,7 @@ const EventForm = () => {
                             <DatePicker
                                 placeholderText="2023-07-01 10:00"
                                 selected={eventTime}
-                                onChange={(date) => setEventTime(date)}
+                                onChange={(date: Date | null) => setEventTime(date)}
                                 defaultdefaultValue={eventTime}
                                 showTimeSelect
                                 timeFormat="HH:mm"
@@ -160,7 +170,6 @@ const EventForm = () => {
 
                     <button
                         onClick={Submit}
-                        onChange={timeHandler}
                         className="flex justify-start relative text-lg px-8 py-3 bg-[#98ee2c]  mr-5 uppercase font-Agda font-bold text-black hover:bg-[#f0f0f0] cursor-pointer" >
                         List Your Event
                         <BsArrowRight className=' ml-2' />

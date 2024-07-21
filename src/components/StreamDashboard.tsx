@@ -1,13 +1,19 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
 import StreamPlayer from "./StreamPlayer";
 
-const StreamDashboard = (params) => {
+interface StreamInfo {
+  id: string;
+  name: string;
+  streamKey: string;
+  isActive: boolean;
+  playbackId: string;
+}
+
+const StreamDashboard = (params: any) => { // update type to be more specific
   const [streamKey, setStreamKey] = useState("");
-  const [getStreamInfo, setGetStreamInfo] = useState("");
-  const router = useRouter();
+  const [getStreamInfo, setGetStreamInfo] = useState<StreamInfo>();
 
   async function fetchData() {
     try {
@@ -26,18 +32,18 @@ const StreamDashboard = (params) => {
   return (
     <div className="mt-8 flex flex-row justify-between gap-4 p-16 min-h-screen text-white">
       <div className="mb-8 flex flex-col justify-start ml-16">
-        <h1 className="text-2xl">{getStreamInfo.name}</h1>
+        <h1 className="text-2xl">{getStreamInfo?.name}</h1>
         <h2>
-          Stream ID: <span>{getStreamInfo.id}</span>
+          Stream ID: <span>{getStreamInfo?.id}</span>
         </h2>
         <h2>
-          Stream Key: <span>{getStreamInfo.streamKey}</span>{" "}
+          Stream Key: <span>{getStreamInfo?.streamKey}</span>{" "}
         </h2>
-        <h2>Stream Status: <span>{getStreamInfo.isActive == false ? "Inactive" : "Active"}</span></h2>
-        <h2>Playback ID: <span>{getStreamInfo.playbackId}</span></h2>
+        <h2>Stream Status: <span>{getStreamInfo?.isActive == false ? "Inactive" : "Active"}</span></h2>
+        <h2>Playback ID: <span>{getStreamInfo?.playbackId}</span></h2>
       </div>
       <div className="bg-white border-white h-[30%] w-[40%] mr-10">
-        <StreamPlayer id={getStreamInfo.playbackId} />
+        <StreamPlayer id={getStreamInfo?.playbackId} />
       </div>
     </div>
   );

@@ -2,8 +2,8 @@
 
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
-import { BsFillArrowRightCircleFill, BsArrowRight } from "react-icons/bs";
-import Link from "next/link"; 
+import { BsArrowRight } from "react-icons/bs";
+import Link from "next/link";
 
 const Tournament = () => {
   const [tournamentName, setTournamentName] = useState("");
@@ -40,21 +40,21 @@ const Tournament = () => {
   //   };
   // }, []);
 
-  const tournamentNameHandler = (event) => {
+  const tournamentNameHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTournamentName(event.target.value);
   };
-  const gameNameHandler = (event) => {
+  const gameNameHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setGameName(event.target.value);
   };
-  const typeHandler = (event) => {
+  const typeHandler = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setType(event.target.value);
   };
 
-  const numberOfTeamsHandler = (event) => {
+  const numberOfTeamsHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setNumberOfTeams(event.target.value);
   };
 
-  const teamNamesHandler = (event) => {
+  const teamNamesHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTeamNames(event.target.value);
   };
 
@@ -62,12 +62,12 @@ const Tournament = () => {
     return Math.floor(Math.random() * 90) + 10;
   }
 
-  const onFormSubmit = async (event) => {
+  const onFormSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     console.log("form submit..");
     try {
       const randomNum = generateRandomTwoDigitNumber();
-      localStorage.setItem("TournId", randomNum);
+      localStorage.setItem("TournId", randomNum.toString());
       if (type == "undefined") return alert("type not set!");
       console.log(
         tournamentName,
@@ -77,7 +77,7 @@ const Tournament = () => {
         teamNames,
         randomNum
       );
-      localStorage.setItem("gameId", 0);
+      localStorage.setItem("gameId", "0");
       const response = await fetch("/api/generate", {
         method: "POST",
         headers: {
@@ -105,6 +105,7 @@ const Tournament = () => {
         tname: tournamentName,
       };
 
+      // @ts-ignore
       router.push({
         pathname: "/viewer",
         query: propsToSend,
